@@ -1,16 +1,15 @@
 from elasticsearch import Elasticsearch
-import logging
 
 _es = Elasticsearch([{'host': 'localhost', 'port': 9200}])
 
-def connectES():
-    _es = None
-    _es = Elasticsearch([{"host": "localhost", "port": 9200}])
+def connectElasticSearch(host=str, port=int):
+    __es = None
+    __es = Elasticsearch([{"host": host, "port": port}])
     if _es.ping():
         print('Pinged')
     else:
         print('No ping')
-    return _es
+    return __es
 
 def createIndex(esObject, indexName, indexBody):
     created = False
@@ -24,9 +23,8 @@ def createIndex(esObject, indexName, indexBody):
     finally:
         return created
 
-def createFlow(esObject, indexName, flow):
+def addFlow(esObject, indexName, flow):
     esObject.index(index=indexName, body=flow)
 
-
 if __name__ == "__main__":
-    logging.basicConfig(level=logging.ERROR)
+    None

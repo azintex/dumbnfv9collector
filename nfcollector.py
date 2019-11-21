@@ -2,15 +2,15 @@ import os, socket, struct, sys
 from datetime import date
 from time import time
 import config as cfg
-from es import createIndex, createFlow, _es
+from es import createIndex, addFlow, _es
 
 
 
 
 
-runMode = cfg.mode
-ipAddress = cfg.ip_address
-port = cfg.port
+#runMode = cfg.mode
+#ipAddress = cfg.ip_address
+#port = cfg.port
 templSize = cfg.template_size_in_bytes
 
 if cfg.caption_duration != 0:
@@ -18,9 +18,9 @@ if cfg.caption_duration != 0:
 else:
     captDur = time() - 100
 # Init socket
-s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 # Binding
-s.bind((ipAddress, port))
+sock.bind((cfg.ip_address, cfg.port))
 
 # Date stamps
 td = str(date.today())
@@ -116,7 +116,7 @@ def startCapture(mode):
         print(data)
 
     while mode == 'unpack' and time() < captDur:
-        data = s.recv(1518)
+        data = sock.recv(1518)
         nfHeader = struct.unpack('!HHLLLL', data[0:20])
         #print(nfHeader)
 
@@ -124,7 +124,7 @@ def startCapture(mode):
             if flow == 0:
                 firstFlow = struct.unpack('!IIIIIIIIBBHHBIBBBHH', data[24:74])
                 #print(firstFlow)
-                createFlow(_es, 'netflow-v9', {"sysUptimeFirst": firstFlow[0], "sysUptimeLast": firstFlow[1], "counterBytes": firstFlow[2], \
+                addFlow(_es, 'netflow-v9', {"sysUptimeFirst": firstFlow[0], "sysUptimeLast": firstFlow[1], "counterBytes": firstFlow[2], \
                     "counterPackets": firstFlow[3], "inputInterface": firstFlow[4], "outputInterface": firstFlow[5], "ipv4SrcAddr": firstFlow[6], \
                         "ipv4DstAddr": firstFlow[7], "ipProtocol": firstFlow[8], "ipTos": firstFlow[9], "transportSrcPort": firstFlow[10], \
                             "transportDstPort": firstFlow[11], "flowSampler": firstFlow[12], "ipv4NextHop": firstFlow[13], "ipv4DstMask": firstFlow[14], \
@@ -132,7 +132,7 @@ def startCapture(mode):
             else:
                 offset = flow * templSize
                 subseqFlow = struct.unpack('!IIIIIIIIBBHHBIBBBHH', data[24 + offset:74 + offset])
-                createFlow(_es, 'netflow-v9', {"sysUptimeFirst": subseqFlow[0], "sysUptimeLast": subseqFlow[1], "counterBytes": subseqFlow[2], \
+                addFlow(_es, 'netflow-v9', {"sysUptimeFirst": subseqFlow[0], "sysUptimeLast": subseqFlow[1], "counterBytes": subseqFlow[2], \
                     "counterPackets": subseqFlow[3], "inputInterface": subseqFlow[4], "outputInterface": subseqFlow[5], "ipv4SrcAddr": subseqFlow[6], \
                         "ipv4DstAddr": subseqFlow[7], "ipProtocol": subseqFlow[8], "ipTos": subseqFlow[9], "transportSrcPort": subseqFlow[10], \
                             "transportDstPort": subseqFlow[11], "flowSampler": subseqFlow[12], "ipv4NextHop": subseqFlow[13], "ipv4DstMask": subseqFlow[14], \
@@ -140,5 +140,4 @@ def startCapture(mode):
                 #print(subseqFlow)
 
 if __name__ == '__main__':
-    startCapture(runMode)
-    #s.close()
+    startCapture(cfg.mode)
