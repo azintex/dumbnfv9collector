@@ -13,7 +13,7 @@ ipAddress = cfg.ip_address
 port = cfg.port
 templSize = cfg.template_size_in_bytes
 
-if !cfg.caption_duration == 0:
+if cfg.caption_duration != 0:
     captDur = time() + cfg.caption_duration
 else:
     captDur = time() - 100
