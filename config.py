@@ -11,4 +11,4 @@ port = 2055
 template_size_in_bytes = 50
 
 # Capture duration in seconds
-caption_duration = 300
+caption_duration = 60
