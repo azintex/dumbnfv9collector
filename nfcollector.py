@@ -112,7 +112,7 @@ def startCapture(mode):
         #ff = open(td + '-flows.txt', 'w')
 
     while mode == 'raw' and time() < captDur:
-        data = s.recv(1518)
+        data = sock.recv(1518)
         print(data)
 
     while mode == 'unpack' and time() < captDur:
