@@ -12,7 +12,7 @@ if __name__ == "__main__":
         # FlowSet ID
         fsId = unpack('!H', data[20:22])
         if fsId[0] == 0:
-            tfs = unpack_from('!H', data, 22)
+            tfs = unpack_from('!HHHHH', data, 22)
             print(str(tfs))
         else:
             fs = unpack_from('!HLLBHHLLLL', data, 22)
