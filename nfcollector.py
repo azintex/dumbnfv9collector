@@ -1,4 +1,5 @@
-import os, socket, struct, sys
+import os, socket, sys
+from struct import unpack, unpack_from
 from datetime import date
 from time import time
 import config as cfg
