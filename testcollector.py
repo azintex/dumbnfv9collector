@@ -10,5 +10,5 @@ if __name__ == "__main__":
         # Flow header
         fh = unpack('!HHLLLL', data[0:20])
         # FlowSet
-        fs = unpack_from('!LLBHHLLLL', data, 20)
-        print(str(fh + fs))
+        fs = unpack('!HH', data[20:24])
+        print(str(fs))
