@@ -3,7 +3,7 @@ from datetime import date
 
 # Default index name prefix is `netflow-v9-`
 indexPrefix = 'netflow-v9-'
-indexName = indexPrefix + date.today()
+indexName = indexPrefix + str(date.today())
 
 settings = {
     "settings" : {
