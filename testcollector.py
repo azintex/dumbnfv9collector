@@ -8,7 +8,7 @@ if __name__ == "__main__":
     while True:
         data = sock.recv(1522)
         # Flow header
-        fh = unpack('!HHLLLL', data[0:20])
+        #fh = unpack('!HHLLLL', data[0:20])
         # FlowSet
         fs = unpack('!HHHH', data[20:28])
-        print(str(fh + fs))
+        print(str(fs))
