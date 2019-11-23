@@ -14,8 +14,8 @@ if __name__ == "__main__":
         if fsId[0] == 0:
             tfs = unpack_from('!HHHHH', data, 22)
             print(str(tfs))
-        else:
-            fs = unpack_from('!HLLBHHLLLL', data, 22)
+        else:        
+            fs = iter_unpack('!HLLBHHLLLL', data)
             print(str(fs))
         # Template FlowSet
         #tfs = unpack('!HH', data[20:24])
