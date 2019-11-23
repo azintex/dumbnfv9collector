@@ -9,6 +9,13 @@ if __name__ == "__main__":
         data = sock.recv(4096)
         # Flow header
         fh = unpack('!HHLLLL', data[0:20])
+        # FlowSet ID
+        fsId = unpack('!H', data[20:22])
+        if fsId == 0:
+            tfs = unpack_from('!HH', data, 22)
+            print(str(tfs))
+        # Template FlowSet
+        #tfs = unpack('!HH', data[20:24])
         # FlowSet
-        fs = unpack('!HHHH', data[20:28])
-        print(str(fs))
+        #fs = unpack('!HHHH', data[20:28])
+        #print(str(fs))
