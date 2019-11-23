@@ -15,7 +15,7 @@ if __name__ == "__main__":
             tfs = unpack_from('!HHHHH', data, 22)
             print(str(tfs))
         else:        
-            fs = iter_unpack('!LLBHHLLLL', data)
+            fs = unpack_from('!LLBHHLLLL', data, 24)
             print(str(fs))
         # Template FlowSet
         #tfs = unpack('!HH', data[20:24])
