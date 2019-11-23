@@ -11,4 +11,4 @@ if __name__ == "__main__":
         fh = unpack('!HHLLLL', data[0:20])
         # FlowSet
         fs = unpack('!HHHH', data[20:28])
-        print(str(fh + '|' + fs))
+        print(str(fh + fs))
