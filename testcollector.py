@@ -6,9 +6,9 @@ sock.bind(('172.16.93.5', 2055))
 
 if __name__ == "__main__":
     while True:
-        data = sock.recv(1522)
+        data = sock.recv(4096)
         # Flow header
-        #fh = unpack('!HHLLLL', data[0:20])
+        fh = unpack('!HHLLLL', data[0:20])
         # FlowSet
-        fs = unpack('!HHHH', data[20:28])
-        print(str(fs))
+        #fs = unpack('!HHH', data[20:26])
+        print(str(fh))
