@@ -1,5 +1,6 @@
 from struct import unpack, unpack_from, iter_unpack
 from socket import socket, AF_INET, SOCK_DGRAM
+import json
 
 sock = socket(AF_INET, SOCK_DGRAM)
 sock.bind(('172.16.93.5', 2055))
@@ -16,7 +17,7 @@ if __name__ == "__main__":
             print(str(tfs))
         else:        
             fs = unpack_from('!LLBHHLLLL', data, 24)
-            print(str(fs))
+            print(json.dumps(fs))
         # Template FlowSet
         #tfs = unpack('!HH', data[20:24])
         # FlowSet
