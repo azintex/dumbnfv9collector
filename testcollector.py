@@ -11,8 +11,8 @@ if __name__ == "__main__":
         #fh = unpack('!HHLLLL', data[0:20])
         # FlowSet ID
         fsId = unpack('!H', data[20:22])
-        if fsId != 0:
-            print(str(fsId))
+        if fsId[0] == 0:
+            print('Template FlowSet ID')
         # Template FlowSet
         #tfs = unpack('!HH', data[20:24])
         # FlowSet
