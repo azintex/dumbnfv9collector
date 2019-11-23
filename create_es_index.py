@@ -74,7 +74,7 @@ settings = {
 }
 
 try:
-    createIndex(_es, index=indexName, body=settings)
+    createIndex(_es, indexName, settings)
     print('Index created')
 except Exception as ex:
     print(str(ex))
