@@ -14,7 +14,7 @@ sock.bind(('172.16.93.5', 2055))
 if __name__ == "__main__":
     while True:
         data = sock.recv(4096)
-        fsHeader = unpack('!HHLLLL', data[:20])
+        fsHeader = unpack('!HHLLLLHH', data[:20])
         """ addFlow(_es, indexName, {"version": fsHeader[0], "count": fsHeader[1], \
                                     "sysUptime": fsHeader[2], "unixSeconds": fsHeader[3], \
                                         "packageSequence": fsHeader[4], "sourceId": fsHeader[5]}) """
