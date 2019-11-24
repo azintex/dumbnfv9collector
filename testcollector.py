@@ -14,11 +14,13 @@ if __name__ == "__main__":
     while True:
         data = sock.recv(4096)
         fsHeader = unpack('!HHLLLL', data[:20])
-        addFlow(_es, indexName, json.dumps(fsHeader))
+        #addFlow(_es, indexName, json.dumps(fsHeader))
         fsId = unpack('!H', data[20:22])
         if fsId[0] == 0:
             fsTemplate = unpack_from('!H*22', data, 22)
-            addFlow(_es, indexName, json.dumps(fsTemplate))
+            print(type(fsHeader,fsTemplate))
+            #addFlow(_es, indexName, json.dumps(fsTemplate))
         else:        
             fs = unpack_from('!LLBHHLLLL', data, 24)
-            addFlow(_es, indexName, json.dumps(fsHeader))
+            print(type(fsHeader, fs))
+            #addFlow(_es, indexName, json.dumps(fsHeader))
