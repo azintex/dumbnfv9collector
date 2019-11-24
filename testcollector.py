@@ -23,7 +23,7 @@ if __name__ == "__main__":
             #addFlow(_es, indexName, json.dumps(fsTemplate))
         else:        
             fs = unpack_from('!LLBHHLLLL', data, 24)
-            addFlow(_es, indexName, {"ipv4SourceAddress": fs[0], \
+            """ addFlow(_es, indexName, {"ipv4SourceAddress": fs[0], \
                                         "ipv4DestinationAddress": fs[1], \
                                             "ipProtocol": fs[2], \
                                                 "transportSourcePort": fs[3], \
@@ -31,4 +31,5 @@ if __name__ == "__main__":
                                                         "counterBytes": fs[5], \
                                                             "counterPackets": fs[6], \
                                                                 "timestampSysUptimeFirst": fs[7], \
-                                                                    "timestampSysUptimeLast": fs[8]})
+                                                                    "timestampSysUptimeLast": fs[8]}) """
+            print(type(fs[7]))
