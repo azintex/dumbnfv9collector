@@ -27,12 +27,12 @@ if __name__ == "__main__":
             # The buffer’s size in bytes must be a multiple of the size required by the format (c)
             fs = iter_unpack('!LLBHHLLLL', data[24:fsHFL[1] * 29 + 24])
             for flow in fs:
-                addFlow(_es, indexName, {"ipv4SourceAddress": fs[0], \
-                                            "ipv4DestinationAddress": fs[1], \
-                                                "ipProtocol": fs[2], \
-                                                    "transportSourcePort": fs[3], \
-                                                        "transportDestinationPort": fs[4], \
-                                                            "counterBytes": fs[5], \
-                                                                "counterPackets": fs[6], \
-                                                                    "timestampSysUptimeFirst": fs[7], \
-                                                                        "timestampSysUptimeLast": fs[8]})
+                addFlow(_es, indexName, {"ipv4SourceAddress": flow[0], \
+                                            "ipv4DestinationAddress": flow[1], \
+                                                "ipProtocol": flow[2], \
+                                                    "transportSourcePort": flow[3], \
+                                                        "transportDestinationPort": flow[4], \
+                                                            "counterBytes": flow[5], \
+                                                                "counterPackets": flow[6], \
+                                                                    "timestampSysUptimeFirst": flow[7], \
+                                                                        "timestampSysUptimeLast": flow[8]})
