@@ -19,8 +19,9 @@ if __name__ == "__main__":
                                     "sysUptime": fsHeader[2], "unixSeconds": fsHeader[3], \
                                         "packageSequence": fsHeader[4], "sourceId": fsHeader[5]}) """
         #fsId = unpack('!H', data[20:22])
-        fs = iter_unpack('!LLBHHLLLL', data[24:fsHeader[7] - 5])
-        print(str(fs))
+        if fsHeader[6] != 0:
+            fs = iter_unpack('!LLBHHLLLL', data[24:fsHeader[7] - 5])    
+            print(str(fs))
         """ if fsId[0] == 0:
             fsTemplate = unpack_from('!HHHHHHHHHHHHHHHHHHHHHH', data, 22)            
             #addFlow(_es, indexName, )
