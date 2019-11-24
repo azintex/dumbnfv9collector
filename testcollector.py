@@ -20,8 +20,8 @@ if __name__ == "__main__":
                                         "packageSequence": fsHeader[4], "sourceId": fsHeader[5]}) """
         #fsId = unpack('!H', data[20:22])
         if fsHeader[6] != 0:
-            fs = iter_unpack('!LLBHHLLLL', data[24:fsHeader[7] - 5])    
-            print(str(fs))
+            #fs = iter_unpack('!LLBHHLLLL', data[24:fsHeader[7] - 5])    
+            print(str(fsHeader[7]))
         """ if fsId[0] == 0:
             fsTemplate = unpack_from('!HHHHHHHHHHHHHHHHHHHHHH', data, 22)            
             #addFlow(_es, indexName, )
