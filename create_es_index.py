@@ -12,71 +12,36 @@ settings = {
     },
     "mappings": {
         "properties": {
-            "sysUptimeFirst": {
-                "type": "text"
+            "ipv4SourceAddress": {
+                "type": "integer"
             },
-            "sysUptimeLast": {
-                "type": "text"
-            },
-            "counterBytes": {
-                "type": "text"
-            },
-            "counterPackets": {
-                "type": "text"
-            },
-            "inputInterface": {
-                "type": "text"
-            },
-            "outputInterface": {
-                "type": "text"
-            },
-            "ipv4SrcAddr": {
-                "type": "text"
-            },
-            "ipv4DstAddr": {
-                "type": "text"
+            "ipv4DestinationAddress": {
+                "type": "integer"
             },
             "ipProtocol": {
-                "type": "text"
+                "type": "integer"
             },
-            "ipTos": {
-                "type": "text"
+            "transportSourcePort": {
+                "type": "integer"
             },
-            "transportSrcPort": {
-                "type": "text"
+            "transportDestinationPort": {
+                "type": "integer"
             },
-            "transportDstPort": {
-                "type": "text"
+            "counterBytes": {
+                "type": "integer"
             },
-            "flowSampler": {
-                "type": "text"
+            "counterPackets": {
+                "type": "integer"
             },
-            "ipv4NextHop": {
-                "type": "text"
+            "timestampSysUptimeFirst": {
+                "type": "integer"
             },
-            "ipv4DstMask": {
-                "type": "text"
-            },
-            "ipv4SrcMask": {
-                "type": "text"
-            },
-            "tcpFlags": {
-                "type": "text"
-            },
-            "destinationAS": {
-                "type": "text"
-            },
-            "sourceAS": {
-                "type": "text"
+            "timestampSysUptimeLast": {
+                "type": "integer"
             }
         }
     }
 }
 
-try:
+if __name__ == "__main__":
     createIndex(_es, indexName, settings)
-    print('Index created')
-except Exception as ex:
-    print(str(ex))
-finally:
-    print('Index not created')
