@@ -15,11 +15,12 @@ if __name__ == "__main__":
     while True:
         data = sock.recv(4096)
         fsHeader = unpack('!HHLLLL', data[:20])
-        addFlow(_es, indexName, {"version": fsHeader[0], "count": fsHeader[1], \
+        """ addFlow(_es, indexName, {"version": fsHeader[0], "count": fsHeader[1], \
                                     "sysUptime": fsHeader[2], "unixSeconds": fsHeader[3], \
-                                        "packageSequence": fsHeader[4], "sourceId": fsHeader[5]})
-        fsId = unpack('!H', data[20:22])
-        if fsId[0] == 0:
+                                        "packageSequence": fsHeader[4], "sourceId": fsHeader[5]}) """
+        #fsId = unpack('!H', data[20:22])
+        print(str(fsHeader))
+        """ if fsId[0] == 0:
             fsTemplate = unpack_from('!HHHHHHHHHHHHHHHHHHHHHH', data, 22)            
             #addFlow(_es, indexName, )
             print(str(fsTemplate))
@@ -34,4 +35,4 @@ if __name__ == "__main__":
                                                         "counterBytes": fs[5], \
                                                             "counterPackets": fs[6], \
                                                                 "timestampSysUptimeFirst": fs[7], \
-                                                                    "timestampSysUptimeLast": fs[8]})
+                                                                    "timestampSysUptimeLast": fs[8]}) """
