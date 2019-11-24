@@ -21,7 +21,8 @@ if __name__ == "__main__":
         fsId = unpack('!H', data[20:22])
         if fsId[0] == 0:
             fsTemplate = unpack_from('!HHHHHHHHHHHHHHHHHHHHHH', data, 22)            
-            addFlow(_es, indexName, )
+            #addFlow(_es, indexName, )
+            print(str(fsTemplate))
         else:
             # Resolve this error : elasticsearch.exceptions.RequestError: RequestError(400, 'mapper_parsing_exception', "failed to parse field [timestampSysUptimeLast] of type [integer] in document with id 'GNLUmm4BFQEDuzdY5Eis'. Preview of field's value: '3286266866'")
             fs = unpack_from('!LLBHHLLLL', data, 24)
