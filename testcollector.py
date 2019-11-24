@@ -21,7 +21,8 @@ if __name__ == "__main__":
             fsTemplate = unpack_from('!H*22', data, 22)
             print(type(fsTemplate[0]))
             #addFlow(_es, indexName, json.dumps(fsTemplate))
-        else:        
+        else:
+            # Resolve this error : elasticsearch.exceptions.RequestError: RequestError(400, 'mapper_parsing_exception', "failed to parse field [timestampSysUptimeLast] of type [integer] in document with id 'GNLUmm4BFQEDuzdY5Eis'. Preview of field's value: '3286266866'")
             fs = unpack_from('!LLBHHLLLL', data, 24)
             addFlow(_es, indexName, {"ipv4SourceAddress": fs[0], \
                                         "ipv4DestinationAddress": fs[1], \
