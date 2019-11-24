@@ -18,7 +18,7 @@ if __name__ == "__main__":
         #addFlow(_es, indexName, json.dumps(fsHeader))
         fsId = unpack('!H', data[20:22])
         if fsId[0] == 0:
-            fsTemplate = unpack_from('!H*22', data, 22)
+            fsTemplate = unpack_from('!HHHHHHHHHHHHHHHHHHHHHH', data, 22)
             print(type(fsTemplate[0]))
             #addFlow(_es, indexName, json.dumps(fsTemplate))
         else:
