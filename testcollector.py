@@ -15,12 +15,13 @@ if __name__ == "__main__":
     while True:
         data = sock.recv(4096)
         fsHeader = unpack('!HHLLLL', data[:20])
-        #addFlow(_es, indexName, json.dumps(fsHeader))
+        addFlow(_es, indexName, {"version": fsHeader[0], "count": fsHeader[1], \
+                                    "sysUptime": fsHeader[2], "unixSeconds": fsHeader[3], \
+                                        "packageSequence": fsHeader[4], "sourceId": fsHeader[5]})
         fsId = unpack('!H', data[20:22])
         if fsId[0] == 0:
-            fsTemplate = unpack_from('!HHHHHHHHHHHHHHHHHHHHHH', data, 22)
-            print(type(fsTemplate[0]))
-            #addFlow(_es, indexName, json.dumps(fsTemplate))
+            fsTemplate = unpack_from('!HHHHHHHHHHHHHHHHHHHHHH', data, 22)            
+            addFlow(_es, indexName, )
         else:
             # Resolve this error : elasticsearch.exceptions.RequestError: RequestError(400, 'mapper_parsing_exception', "failed to parse field [timestampSysUptimeLast] of type [integer] in document with id 'GNLUmm4BFQEDuzdY5Eis'. Preview of field's value: '3286266866'")
             fs = unpack_from('!LLBHHLLLL', data, 24)

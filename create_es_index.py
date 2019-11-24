@@ -13,31 +13,31 @@ settings = {
     "mappings": {
         "properties": {
             "ipv4SourceAddress": {
-                "type": "integer"
+                "type": "long"
             },
             "ipv4DestinationAddress": {
-                "type": "integer"
+                "type": "long"
             },
             "ipProtocol": {
-                "type": "integer"
+                "type": "long"
             },
             "transportSourcePort": {
-                "type": "integer"
+                "type": "long"
             },
             "transportDestinationPort": {
-                "type": "integer"
+                "type": "long"
             },
             "counterBytes": {
-                "type": "integer"
+                "type": "long"
             },
             "counterPackets": {
-                "type": "integer"
+                "type": "long"
             },
             "timestampSysUptimeFirst": {
-                "type": "integer"
+                "type": "long"
             },
             "timestampSysUptimeLast": {
-                "type": "integer"
+                "type": "long"
             }
         }
     }
