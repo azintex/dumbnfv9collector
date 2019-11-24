@@ -18,9 +18,9 @@ if __name__ == "__main__":
         fsId = unpack('!H', data[20:22])
         if fsId[0] == 0:
             fsTemplate = unpack_from('!H*22', data, 22)
-            print(type(fsHeader,fsTemplate))
+            print(type(fsTemplate[0]))
             #addFlow(_es, indexName, json.dumps(fsTemplate))
         else:        
             fs = unpack_from('!LLBHHLLLL', data, 24)
-            print(type(fsHeader, fs))
+            print(type(fs[0]))
             #addFlow(_es, indexName, json.dumps(fsHeader))
