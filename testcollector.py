@@ -14,28 +14,25 @@ sock.bind(('172.16.93.5', 2055))
 if __name__ == "__main__":
     while True:
         data = sock.recv(4096)
-        fsHeader = unpack_from('!HHLLLLHH', data)
-        """ addFlow(_es, indexName, {"version": fsHeader[0], "count": fsHeader[1], \
-                                    "sysUptime": fsHeader[2], "unixSeconds": fsHeader[3], \
-                                        "packageSequence": fsHeader[4], "sourceId": fsHeader[5]}) """
-        #fsId = unpack('!H', data[20:22])
-        if fsHeader[6] != 0:
-            fs = iter_unpack('!LLBHHLLLL', data[24:fsHeader[1] * 29 + 24])
+        # First unpack from bytes FlowSet header, FlowSet ID and FlowSet length.
+        fsHFL = unpack_from('!HHLLLLHH', data)
+        # Insert data in Elasticsearch.
+        addFlow(_es, indexName, {"version": fsHFL[0], "count": fsHFL[1], \
+                                    "sysUptime": fsHFL[2], "unixSeconds": fsHFL[3], \
+                                        "packageSequence": fsHFL[4], "sourceId": fsHFL[5]})
+        # Check for FlowSet ID. Data record FlowSet ID greater than 255. 
+        # Template record FlowSet ID in 0-255 range.
+        if fsHFL[6] != 0:
+            # First get unpacked iterable. 
+            # The buffer’s size in bytes must be a multiple of the size required by the format (c)
+            fs = iter_unpack('!LLBHHLLLL', data[24:fsHFL[1] * 29 + 24])
             for flow in fs:
-                print(str(flow))
-        """ if fsId[0] == 0:
-            fsTemplate = unpack_from('!HHHHHHHHHHHHHHHHHHHHHH', data, 22)            
-            #addFlow(_es, indexName, )
-            print(str(fsTemplate))
-        else:
-            # Resolve this error : elasticsearch.exceptions.RequestError: RequestError(400, 'mapper_parsing_exception', "failed to parse field [timestampSysUptimeLast] of type [integer] in document with id 'GNLUmm4BFQEDuzdY5Eis'. Preview of field's value: '3286266866'")
-            fs = unpack_from('!LLBHHLLLL', data, 24)
-            addFlow(_es, indexName, {"ipv4SourceAddress": fs[0], \
-                                        "ipv4DestinationAddress": fs[1], \
-                                            "ipProtocol": fs[2], \
-                                                "transportSourcePort": fs[3], \
-                                                    "transportDestinationPort": fs[4], \
-                                                        "counterBytes": fs[5], \
-                                                            "counterPackets": fs[6], \
-                                                                "timestampSysUptimeFirst": fs[7], \
-                                                                    "timestampSysUptimeLast": fs[8]}) """
+                addFlow(_es, indexName, {"ipv4SourceAddress": fs[0], \
+                                            "ipv4DestinationAddress": fs[1], \
+                                                "ipProtocol": fs[2], \
+                                                    "transportSourcePort": fs[3], \
+                                                        "transportDestinationPort": fs[4], \
+                                                            "counterBytes": fs[5], \
+                                                                "counterPackets": fs[6], \
+                                                                    "timestampSysUptimeFirst": fs[7], \
+                                                                        "timestampSysUptimeLast": fs[8]})

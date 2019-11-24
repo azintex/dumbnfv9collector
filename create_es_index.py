@@ -12,6 +12,24 @@ settings = {
     },
     "mappings": {
         "properties": {
+            "version": {
+                "type": "long"
+            },
+            "count": {
+                "type": "long"
+            },
+            "sysUptime": {
+                "type": "long"
+            },
+            "unixSeconds": {
+                "type": "long"
+            },
+            "packageSequence": {
+                "type": "long"
+            },
+            "sourceId": {
+                "type": "long"
+            },
             "ipv4SourceAddress": {
                 "type": "long"
             },
