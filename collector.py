@@ -12,11 +12,8 @@ from _es import addFlow
 sock = socket(AF_INET, SOCK_DGRAM)
 sock.bind((clr['ip_address'], clr['port']))
 
-# Check for capture duration. In case is 0, capture until interrupted.
-if clr['dur'] != 0:
-    cd = clr['dur']
-
 index = es['index']['prefix'] + es['index']['name']
+
 
 def getDataRecordFlowSets():
     while True:
@@ -46,8 +43,10 @@ def getDataRecordFlowSets():
 
 
 def startCapture(mode='unpacked'):
+    # Check for capture duration.
     if clr['dur'] != 0:
-        while time() < clr['dur']:
+        cd = time() + clr['dur']
+        while time() < :
             getDataRecordFlowSets()
     else:
         getDataRecordFlowSets()
