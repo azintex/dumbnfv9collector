@@ -49,7 +49,8 @@ def startCapture(mode='unpacked'):
         while time() < cd:
             getDataRecordFlowSets()
     else:
-        getDataRecordFlowSets()
+        while True:
+            getDataRecordFlowSets()
     
 if __name__ == "__main__":
     startCapture(clr['mode'])
