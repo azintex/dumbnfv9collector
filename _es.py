@@ -1,15 +1,8 @@
 from elasticsearch import Elasticsearch
+from config import es
 
-_es = Elasticsearch([{'host': 'localhost', 'port': 9200}])
-
-def connectElasticSearch(host=str, port=int):
-    __es = None
-    __es = Elasticsearch([{"host": host, "port": port}])
-    if _es.ping():
-        print('Pinged')
-    else:
-        print('No ping')
-    return __es
+# Elasticsearch connection object
+_esco = Elasticsearch([es['connection']])
 
 def createIndex(esObject, indexName, indexBody):
     created = False

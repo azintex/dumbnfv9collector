@@ -1,14 +1,48 @@
-# Set collector mode `raw` or `unpack`
-mode = 'unpack'
+from datetime import date
 
-# LIsten IP address.
-ip_address = '172.16.93.5'
+# Collector config options :
+    # mode = @str 
+    # `raw` get all FlowSets and store in binary file which then may be parsed.
+    # `unpacked` get only data record FlowSets and write to Elasticsearch.
+    # Default mode `unpacked`
 
-# Listen port (UDP).
-port = 2055
+    # ip_address = @str 
+    # Define listen IPv4 address.
 
-# Template size in bytes. Template size configured on exporter.
-template_size_in_bytes = 50
+    # port = @int
+    # Define listen port.
 
-# Capture duration in seconds
-capture_duration = 600
+    # ts = @int
+    # Data record FlowSet template size in bytes.
+    # Information about data record FlowSet template may be obtained from exporter device. 
+    # e.g. on Cisco ASR 1002-X : router#show flow monitor {MONITOR_NAME} templates details
+
+    # dur = @int
+    # Capture duration time in seconds.  
+clr = {
+    'mode': 'unpacked',
+    'ip_address': '172.16.93.5',
+    'port': 2055,
+    'ts': 29,
+    'dur': 300
+}
+
+
+# Elasticsearch config options :
+    # host = @str
+
+    # port = @int
+
+    # index :
+    # prefix = @str
+    # name = @str
+es = {
+    'connection': {
+        'host' : 'localhost',
+        'port': 9200
+    },
+    'index': {
+        'prefix': 'netflow-v9',
+        'name': ''
+    }
+}
