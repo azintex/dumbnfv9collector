@@ -42,7 +42,7 @@ es = {
         'port': 9200
     },
     'index': {
-        'prefix': 'netflow-v9',
-        'name': ''
+        'prefix': 'netflow-v9-',
+        'name': str(date.today())
     }
 }

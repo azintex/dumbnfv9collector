@@ -13,6 +13,8 @@ sock.bind((clr['ip_address'], clr['port']))
 if clr['dur'] != 0:
     cd = clr['dur']
 
+index = es['index']['prefix'] + es['index']['name']
+
 def startCapture(mode='unpacked'):
     try:
         if not cd:
@@ -21,7 +23,7 @@ def startCapture(mode='unpacked'):
                 # First unpack from bytes FlowSet header, FlowSet ID and FlowSet length.
                 fsHFL = unpack_from('!HHLLLLHH', data)
                 # `addFlow` function insert NetFlow v9 header data in Elasticsearch.
-                addFlow(es['index']['name'], {"version": fsHFL[0], "count": fsHFL[1], \
+                addFlow(index, {"version": fsHFL[0], "count": fsHFL[1], \
                                                 "sysUptime": fsHFL[2], "unixSeconds": fsHFL[3], \
                                                     "packageSequence": fsHFL[4], "sourceId": fsHFL[5]})
                 # Check for FlowSet ID. Data record FlowSet ID greater than 255. 
@@ -31,7 +33,7 @@ def startCapture(mode='unpacked'):
                 # The buffer’s size in bytes must be a multiple of the size required by the format (c)
                     fs = iter_unpack('!LLBHHLLLL', data[24:fsHFL[1] * clr['ts'] + 24])
                     for flow in fs:
-                        addFlow(es['index']['name'], {"ipv4SourceAddress": flow[0], \
+                        addFlow(index, {"ipv4SourceAddress": flow[0], \
                                                         "ipv4DestinationAddress": flow[1], \
                                                             "ipProtocol": flow[2], \
                                                                 "transportSourcePort": flow[3], \
@@ -48,7 +50,7 @@ def startCapture(mode='unpacked'):
             # First unpack from bytes FlowSet header, FlowSet ID and FlowSet length.
             fsHFL = unpack_from('!HHLLLLHH', data)
             # `addFlow` function insert NetFlow v9 header data in Elasticsearch.
-            addFlow(es['index']['name'], {"version": fsHFL[0], "count": fsHFL[1], \
+            addFlow(index, {"version": fsHFL[0], "count": fsHFL[1], \
                                             "sysUptime": fsHFL[2], "unixSeconds": fsHFL[3], \
                                                 "packageSequence": fsHFL[4], "sourceId": fsHFL[5]})
             # Check for FlowSet ID. Data record FlowSet ID greater than 255. 
@@ -58,7 +60,7 @@ def startCapture(mode='unpacked'):
             # The buffer’s size in bytes must be a multiple of the size required by the format (c)
                 fs = iter_unpack('!LLBHHLLLL', data[24:fsHFL[1] * clr['ts'] + 24])
                 for flow in fs:
-                    addFlow(es['index']['name'], {"ipv4SourceAddress": flow[0], \
+                    addFlow(index, {"ipv4SourceAddress": flow[0], \
                                                     "ipv4DestinationAddress": flow[1], \
                                                         "ipProtocol": flow[2], \
                                                             "transportSourcePort": flow[3], \
