@@ -2,9 +2,12 @@ from struct import unpack_from, iter_unpack
 from socket import socket, AF_INET, SOCK_DGRAM
 from time import time
 
-from _es import addFlow, _esco
-from create_es_index import settings
+# clr - Collector config options.
+# es - Elasticsearch config options.
 from config import clr, es
+
+# addFlow function for add data record FlowSets in Elasticsearch.
+from _es import addFlow
 
 sock = socket(AF_INET, SOCK_DGRAM)
 sock.bind((clr['ip_address'], clr['port']))
