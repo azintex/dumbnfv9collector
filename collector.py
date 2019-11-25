@@ -16,7 +16,7 @@ index = es['index']['prefix'] + es['index']['name']
 
 
 def getDataRecordFlowSets():
-    while True:
+    #while True:
         data = sock.recv(4096)
         # First unpack from bytes FlowSet header, FlowSet ID and FlowSet length.
         fsHFL = unpack_from('!HHLLLLHH', data)
