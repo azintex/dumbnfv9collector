@@ -46,7 +46,7 @@ def startCapture(mode='unpacked'):
     # Check for capture duration.
     if clr['dur'] != 0:
         cd = time() + clr['dur']
-        while time() < :
+        while time() < cd:
             getDataRecordFlowSets()
     else:
         getDataRecordFlowSets()
