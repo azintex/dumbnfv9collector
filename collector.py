@@ -23,7 +23,7 @@ def getDataRecordFlowSets():
     #addFlow(index, {"version": fsHFL[0], "count": fsHFL[1], \
                         #"sysUptime": fsHFL[2], "unixSeconds": fsHFL[3], \
                             #"packageSequence": fsHFL[4], "sourceId": fsHFL[5]})
-    fs = {"version": fsHFL[0], "count": fsHFL[1], \
+    fsd = {"version": fsHFL[0], "count": fsHFL[1], \
                         "sysUptime": fsHFL[2], "unixSeconds": fsHFL[3], \
                             "packageSequence": fsHFL[4], "sourceId": fsHFL[5]}
     # Check for FlowSet ID. Data record FlowSet ID greater than 255. 
@@ -33,7 +33,7 @@ def getDataRecordFlowSets():
         # The buffer’s size in bytes must be a multiple of the size required by the format (c)
         fs = iter_unpack('!LLBHHLLLL', data[24:fsHFL[1] * clr['ts'] + 24])
         for flow in fs:
-            addFlow(index, fs.update({"ipv4SourceAddress": flow[0], \
+            addFlow(index, fsd.update({"ipv4SourceAddress": flow[0], \
                                 "ipv4DestinationAddress": flow[1], \
                                     "ipProtocol": flow[2], \
                                         "transportSourcePort": flow[3], \
