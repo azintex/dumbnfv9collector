@@ -15,7 +15,31 @@ sock.bind((clr['ip_address'], clr['port']))
 index = es['index']['prefix'] + es['index']['name']
 
 
-def getDataRecordFlowSets():
+def templateFlowSet(data):
+    #  0                   1                   2                   3
+    # 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+    # +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-
+    # |       FlowSet ID = 0          |          Length              |
+    # +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-
+    # |      Template ID > 255        |         Field Count          |
+    # +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-
+
+    flowSetIdLenTemplIdFieldCount = unpack_from('!HHHH', data)
+
+    #+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    #|        Field Type 1           |         Field Length 1        |
+    #+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    fields = []
+    i = int
+    for field in range(flowSetIdLenTemplIdFieldCount[3]):
+        fields.append(unpack_from('!HH', data, 8 + i))
+        i += 2
+    return fields
+
+def dataFlowSet(data):
+    print('Ok')
+
+def getFlowSets():
     data = sock.recv(4096)
     # First unpack from bytes FlowSet header, FlowSet ID and FlowSet length.
     # Last 4 bytes added temp for testing template flowset!!!
