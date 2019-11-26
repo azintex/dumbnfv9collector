@@ -42,16 +42,8 @@ def getDataRecordFlowSets():
                                                     "counterPackets": flow[6], \
                                                         "timestampSysUptimeFirst": flow[7], \
                                                             "timestampSysUptimeLast": flow[8]})
-            print(fsd)
-            """ addFlow(index, fsd.update({"ipv4SourceAddress": flow[0], \
-                                "ipv4DestinationAddress": flow[1], \
-                                    "ipProtocol": flow[2], \
-                                        "transportSourcePort": flow[3], \
-                                            "transportDestinationPort": flow[4], \
-                                                "counterBytes": flow[5], \
-                                                    "counterPackets": flow[6], \
-                                                        "timestampSysUptimeFirst": flow[7], \
-                                                            "timestampSysUptimeLast": flow[8]})) """
+            #print(fsd)
+            addFlow(index, fsd)
 
 
 def startCapture(mode='unpacked'):
