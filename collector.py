@@ -28,10 +28,11 @@ def getDataRecordFlowSets():
                             "packageSequence": fsHFL[4], "sourceId": fsHFL[5]}
     # Check for FlowSet ID. Data record FlowSet ID greater than 255. 
     # Template record FlowSet ID in 0-255 range.
-    if fsHFL[6] != 0:
+    if fsHFL[6] == 0:
+        print(str(fsHFL))
         # First get unpacked iterable. 
         # The buffer’s size in bytes must be a multiple of the size required by the format (c)
-        fs = iter_unpack('!LLBHHLLLL', data[24:fsHFL[1] * clr['ts'] + 24])
+"""         fs = iter_unpack('!LLBHHLLLL', data[24:fsHFL[1] * clr['ts'] + 24])
         for flow in fs:
             fsd.update({"ipv4SourceAddress": flow[0], \
                                 "ipv4DestinationAddress": flow[1], \
@@ -42,8 +43,8 @@ def getDataRecordFlowSets():
                                                     "counterPackets": flow[6], \
                                                         "timestampSysUptimeFirst": flow[7], \
                                                             "timestampSysUptimeLast": flow[8]})
-            #print(fsd)
-            addFlow(index, fsd)
+            addFlow(index, fsd) """
+
 
 
 def startCapture(mode='unpacked'):
