@@ -33,7 +33,7 @@ def getDataRecordFlowSets():
         # The buffer’s size in bytes must be a multiple of the size required by the format (c)
         fs = iter_unpack('!LLBHHLLLL', data[24:fsHFL[1] * clr['ts'] + 24])
         for flow in fs:
-            print(fsd.update({"ipv4SourceAddress": flow[0], \
+            fsd.update({"ipv4SourceAddress": flow[0], \
                                 "ipv4DestinationAddress": flow[1], \
                                     "ipProtocol": flow[2], \
                                         "transportSourcePort": flow[3], \
@@ -41,7 +41,8 @@ def getDataRecordFlowSets():
                                                 "counterBytes": flow[5], \
                                                     "counterPackets": flow[6], \
                                                         "timestampSysUptimeFirst": flow[7], \
-                                                            "timestampSysUptimeLast": flow[8]}))
+                                                            "timestampSysUptimeLast": flow[8]})
+            print(fsd)
             """ addFlow(index, fsd.update({"ipv4SourceAddress": flow[0], \
                                 "ipv4DestinationAddress": flow[1], \
                                     "ipProtocol": flow[2], \
