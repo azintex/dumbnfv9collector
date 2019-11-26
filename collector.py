@@ -18,8 +18,9 @@ index = es['index']['prefix'] + es['index']['name']
 def getDataRecordFlowSets():
     data = sock.recv(4096)
     # First unpack from bytes FlowSet header, FlowSet ID and FlowSet length.
-    # Last 2 bytes added temp for testing template flowset!!!
-    fsHFL = unpack_from('!HHLLLLHHHH', data)
+    # Last 4 bytes added temp for testing template flowset!!!
+    #
+    fsHFL = unpack_from('!HHLLLLHHHHHHHHHHHHHHHHHHHHHH', data)
     # `addFlow` function insert NetFlow v9 header data in Elasticsearch.
     #addFlow(index, {"version": fsHFL[0], "count": fsHFL[1], \
                         #"sysUptime": fsHFL[2], "unixSeconds": fsHFL[3], \
