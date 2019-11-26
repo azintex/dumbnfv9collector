@@ -42,7 +42,7 @@ es = {
         'port': 9200
     },
     'index': {
-        'prefix': 'test-index',
+        'prefix': 'test-',
         'name': str(date.today())
     }
 }
