@@ -1,4 +1,4 @@
-from elasticsearch import Elasticsearch
+#from elasticsearch import Elasticsearch
 from config import es
 
 # Elasticsearch connection object
