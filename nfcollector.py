@@ -6,8 +6,8 @@ import config as cfg
 runMode = cfg.mode
 ipAddress = cfg.ip_address
 port = cfg.port
-templSize = cfg.template_size_in_bytes
-captDur = time() + cfg.caption_duration
+templSize = cfg.template_size
+captDur = time() + cfg.capturing_duration
 
 # Init socket
 s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
